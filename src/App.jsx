@@ -72,8 +72,13 @@ function App() {
   return (
     <>
     
-      <div className="card flex flex-col text-center bg-lime-400 m-2 p-2 gap-3 sm:bg-lime-600">
+      <div className="card flex flex-col text-center rounded-md bg-lime-400 m-2 p-2 gap-3 sm:bg-lime-600">
         <h2 className='text-white'>PokeWar</h2>
+        <p>
+          <i className='color:black'>
+            note : just click on find pokemon if you wanna play with an existing pokemon :) 
+          </i>
+        </p>
         <div className='flex flex-col rounded-md justify-center align-center gap-3 bg-pink-600 p-2'>
 
           <input type="text" 
@@ -145,8 +150,8 @@ function App() {
               >
                 Play!
               </button>
-              <br></br>
-              {displayr === true? <h1>{result} wins</h1> : ""}
+              <br/>
+              {displayr === true? <h1 className='mx-1'>{result} wins</h1> : ""}
       </div>
     </>
   )
