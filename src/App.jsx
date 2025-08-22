@@ -151,7 +151,7 @@ function App() {
                 Play!
               </button>
               <br/>
-              {displayr === true? <h1 className='mx-1'>{result} wins</h1> : ""}
+              {displayr === true? <h1 className='mx-1 text-white'>{result} wins</h1> : ""}
       </div>
     </>
   )
