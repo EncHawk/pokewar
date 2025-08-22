@@ -7,7 +7,8 @@ function App() {
   const [pokemon, setPokemon] = useState(null);
   const [cPokemon, setcPokemon] = useState(null);
   const [input , setInput] = useState('gengar');
-
+  const [result, setResult] = useState('User');
+  const [displayr, setDisplayr] = useState(false);
 
   async function  returnPokemonDetails(){
     const computerPokemon = randomPoke(Easy , Medium , Hard);
@@ -17,7 +18,24 @@ function App() {
 
   function handlePlay(){
     if(pokemon && cPokemon){
-      if(pokemon.stat)
+      const sum1 = (pokemon.stats[0].base_stat +
+        pokemon.stats[1].base_stat +
+        pokemon.stats[2].base_stat+
+        pokemon.stats[3].base_stat
+      )
+      const sum2 = (cPokemon.stats[0].base_stat +
+        cPokemon.stats[1].base_stat +
+        cPokemon.stats[2].base_stat+
+        cPokemon.stats[3].base_stat
+      )
+      if(!(sum1>=sum2)){
+        setResult('Computer');
+        setDisplayr(true);
+      }
+      else{
+        setResult('User');
+        setDisplayr(true);
+      }
     }
     else{
       setError('cant play rn, either pokemon is missing!')
@@ -31,7 +49,7 @@ function App() {
 
   const poke = async (poki)=>{
     try{
-      
+      returnPokemonDetails();
       setLoading(true);
       setError(null);
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${poki}`)
@@ -49,13 +67,12 @@ function App() {
   }
 
   useEffect(()=>{
-    returnPokemonDetails();
     poke(input);
   } ,[]);
   return (
     <>
     
-      <div className="card flex flex-col m-2 p-2 gap-3">
+      <div className="card flex flex-col bg-lime-400 m-2 p-2 gap-3 sm:bg-lime-600">
         this is from inside the card
         <div className='flex flex-col rounded-md justify-center align-center gap-3 bg-pink-600 p-2'>
 
@@ -128,6 +145,8 @@ function App() {
               >
                 Play!
               </button>
+              <br></br>
+              {displayr === true? <h1>{result} wins</h1> : ""}
       </div>
     </>
   )
